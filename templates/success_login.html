@@ -1,0 +1,13 @@
+{%extends 'base.html'%}
+{% block content %}
+  {% if user.is_authenticated %}
+    <h1>Welcome {{user.username}}</h1>
+    {% if user.profile.type_user == 's' %}
+    <h2>Student</h2>
+    {% elif user.profile.type_user == 't' %}
+    <h2>Teacher</h2>
+    {%endif%}
+  {%else %}
+    <h1>Error</h1>
+  {%endif%}
+{% endblock %}

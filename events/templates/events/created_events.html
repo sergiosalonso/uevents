@@ -1,0 +1,22 @@
+{%extends 'base.html'%}
+{% block content %}
+<h1>Created Events</h1>
+<div class="row">
+  {% for event in created_events %}
+    {% if user == event.creator%}
+    <div class="col-md-4 col-sm-12">
+        <div class="card h-100 text-center">
+          <div class="card-header h-100">
+            <h5 class="card-title text-align"><a href="{%url 'events:event' slug=event.slug%}">{{event.name}}</a></h5>
+            {%if user in event.assistants.all %}
+            <a class="btn btn-primary btn-lg" href="{% url 'events:leave' slug=event.slug %}" role="button">Leave</a>
+            {% else %}
+            <a class="btn btn-primary btn-lg" href="{% url 'events:join' slug=event.slug %}" role="button">Join</a>
+            {% endif %}
+          </div>
+        </div>
+    </div>
+    {% endif %}
+  {% endfor %}
+</div>
+{% endblock %}

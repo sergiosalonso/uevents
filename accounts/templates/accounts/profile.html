@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<div class="jumbotron">
+
+    <h1>{{profile.user.username}}</h1>
+    {% if profile.profile_image %}
+      <img src="{{ profile.profile_image.url }}" alt="No profile Image">
+    {% else %}
+      <img src="{% static "images/no-image.png" %}" alt="No profile Image">
+    {% endif %}
+
+    {% if profile.type_user == 's' %}
+      <h2>Estudiante</h2>
+    {% elif profile.type_user == 't' %}
+      <h2>Profesor</h2>
+    {%endif%}
+    <h2>{{profile.bio}}</h2>
+    {%if user == profile.user %}
+    <table>
+      <tr>
+        <td><a class="btn btn-warning" href="{% url 'accounts:update' slug=profile.slug %}">Update</a></td>
+        <td><a class="btn btn-danger" href="{% url 'accounts:delete' slug=profile.slug %}">Delete</a></td>
+      </tr>
+    </table>
+    {% endif %}
+</div>
+{% endblock %}
